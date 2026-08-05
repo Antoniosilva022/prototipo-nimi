@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JusMed Triage | Leitura de inconsistências</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="bg-orb orb-a"></div>
+    <div class="bg-orb orb-b"></div>
+
+    <main class="shell">
+      <section class="hero card">
+        <div class="eyebrow">Protótipo para triagem documental</div>
+        <h1>JusMed Triage</h1>
+        <p class="lead">
+          Um mini site para reduzir o tempo gasto na leitura manual de petições,
+          destacando divergências, lacunas e perguntas críticas antes da perícia.
+        </p>
+
+        <div class="hero-grid">
+          <div class="metric">
+            <span class="metric-value" id="riskScore">0</span>
+            <span class="metric-label">sinais de atenção</span>
+          </div>
+          <div class="metric">
+            <span class="metric-value" id="evidenceCount">0</span>
+            <span class="metric-label">pontos documentados</span>
+          </div>
+          <div class="metric">
+            <span class="metric-value" id="gapCount">0</span>
+            <span class="metric-label">lacunas detectadas</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="content-grid timeline-grid">
+        <article class="card panel">
+          <div class="panel-header">
+            <h2>Linha do tempo do caso</h2>
+            <p>Organiza os fatos em ordem para separar condição prévia, vínculo, afastamento e rescisão.</p>
+          </div>
+          <div id="timelineList" class="timeline-list"></div>
+        </article>
+
+        <article class="card panel">
+          <div class="panel-header">
+            <h2>Evidências x lacunas</h2>
+            <p>Mostra rapidamente o que está comprovado, o que contradiz a narrativa e o que falta no processo.</p>
+          </div>
+          <div id="evidenceGrid" class="evidence-grid"></div>
+        </article>
+      </section>
+
+      <section class="content-grid">
+        <article class="card panel">
+          <div class="panel-header">
+            <h2>Leitura estruturada do caso</h2>
+            <p>Os blocos abaixo resumem o que foi alegado e o que está documentalmente sustentado.</p>
+          </div>
+          <div id="factBlocks" class="fact-blocks"></div>
+        </article>
+
+        <aside class="card panel accent-panel">
+          <div class="panel-header">
+            <h2>Inconsistências prioritárias</h2>
+            <p>O sistema prioriza o que tende a gerar mais dúvida pericial.</p>
+          </div>
+          <div id="findingList" class="finding-list"></div>
+        </aside>
+      </section>
+
+      <section class="content-grid lower-grid">
+        <article class="card panel">
+          <div class="panel-header">
+            <h2>Perguntas que a IA ajuda a responder</h2>
+            <p>Em vez de “ler tudo”, a equipe chega com hipóteses e checagens objetivas.</p>
+          </div>
+          <div id="questionList" class="question-list"></div>
+        </article>
+
+        <article class="card panel">
+          <div class="panel-header">
+            <h2>Como esta solução funciona</h2>
+            <p>Regra simples + texto explicável. O protótipo não substitui o perito; ele filtra o ruído.</p>
+          </div>
+          <ol class="workflow">
+            <li>Extrai fatos centrais da petição e dos anexos.</li>
+            <li>Compara datas, diagnósticos, afastamentos e prova documental.</li>
+            <li>Marca divergências, faltas de evidência e contradições entre narrativa e documento.</li>
+            <li>Entrega um resumo curto, com priorização do que vale ser checado primeiro.</li>
+          </ol>
+        </article>
+      </section>
+
+      <section class="card panel analysis-panel">
+        <div class="panel-header">
+          <h2>Parecer preliminar da IA</h2>
+          <p>O texto abaixo é uma síntese orientada por regras. Ele não decide o caso; apenas organiza a leitura inicial.</p>
+        </div>
+        <div class="analysis-summary">
+          <div>
+            <span class="summary-label">Tese principal</span>
+            <p id="mainThesis"></p>
+          </div>
+          <div>
+            <span class="summary-label">Risco de inconsistência</span>
+            <p id="mainRisk"></p>
+          </div>
+        </div>
+        <div id="preliminaryOpinion" class="opinion-box"></div>
+      </section>
+
+      <section class="card panel prompt-panel">
+        <div class="panel-header">
+          <h2>Prompt de IA para triagem</h2>
+          <p>Este bloco mostra como a equipe pode pedir uma análise padronizada a partir do texto bruto do caso.</p>
+        </div>
+
+        <label class="prompt-label" for="rawCaseText">Texto bruto do caso</label>
+        <textarea id="rawCaseText" class="prompt-input" rows="8"></textarea>
+
+        <div class="prompt-actions">
+          <button id="buildPromptButton" type="button">Gerar prompt</button>
+          <button id="buildOpinionButton" type="button">Gerar parecer</button>
+          <button id="copyPromptButton" type="button" class="secondary">Copiar prompt</button>
+          <button id="copyOpinionButton" type="button" class="secondary">Copiar parecer</button>
+          <button id="downloadReportButton" type="button" class="secondary">Exportar relatório</button>
+          <button id="printReportButton" type="button" class="secondary">Salvar como PDF</button>
+        </div>
+
+        <label class="prompt-label" for="generatedPrompt">Prompt sugerido</label>
+        <textarea id="generatedPrompt" class="prompt-output" rows="14" readonly></textarea>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
